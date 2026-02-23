@@ -1,0 +1,375 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+  <head>
+    <style>
+      .centered {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            line-height: 1.2;
+            /* width: 60%; */
+        }
+        .centered img {
+            margin-right: 10px;
+
+        }
+        .left-align {
+            text-align: left;
+            /* width: 60%; */
+        }
+      body {
+          font-family: Arial, sans-serif;
+          background-color: #f5f5f5;
+          color: #333;
+          margin: 0;
+          padding: 20px;
+
+      }
+      .paper {
+          margin-bottom: 20px;
+          background-color: #f9f9f9; /* 浅灰色背景 */
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          padding: 20px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          
+      }
+      .new_h3{
+        color: #5c6bc0;
+      }
+      .paper h2 {
+          font-size: 24px;
+          font-weight: bold;
+          margin-bottom: 10px;
+          color: #5c6bc0; /* 柔和的蓝紫色 */
+      }
+      .paper p {
+          font-size: 16px;
+          line-height: 1.5;
+          color: #666; /* 柔和的灰色 */
+      }
+      .paper a {
+          color: #5c6bc0; /* 柔和的蓝紫色 */
+          text-decoration: none;
+          transition: color 0.3s ease;
+      }
+      .paper a:hover {
+          color: #3949ab; /* 柔和的深蓝色 */
+          text-decoration: underline;
+      }
+  </style>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="./pic/bitbug_favicon.ico" type="image/x-icon">
+    <title>
+      Mono-DDGS: Endoscopic Monocular Scene Reconstruction with Dual-Stage Decoupled Gaussian Splatting
+    </title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,800italic,400,700,800' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="css/project.css" media="screen" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/iconize.css" />
+    <script src="js/google-code-prettify/prettify.js"></script> -->
+  </head>
+
+  <!-- cover -->
+  <section>
+    <div class="jumbotron text-center mt-0">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            
+            <h2 class="centered">
+              <div>
+                Mono-DDGS: Endoscopic Monocular Scene Reconstruction with  
+                <br>Dual-Stage Decoupled Gaussian Splatting
+              </div>
+          </h2>
+            <!-- 
+            <h4 style="color:#5a6268;"> MICCAI 2024 </h4>
+            <hr>
+            -->
+            <h6>
+                <a href="https://scholar.google.co.uk/citations?hl=en&pli=1&user=UjwWz2QAAAAJ" target="_blank">Jinhua Liu</a><sup>1</sup>,
+                <a href="https://scholar.google.com/citations?hl=en&user=nR7wVkoAAAAJ" target="_blank">Wen Tang</a><sup>1†</sup>,
+                <a href="https://orcid.org/0000-0002-9355-2722" target="_blank">Yongsheng Shi</a><sup>2</sup>,
+                
+                <a href="https://orcid.org/0000-0002-6232-193X"  target="_blank">Dongjin Huang</a><sup>2</sup>,
+
+              </h6>
+            <p>
+                <sup>1</sup>Bournemouth University &nbsp;&nbsp;
+                <sup>2</sup>Shanghai University &nbsp;&nbsp;
+                <sup>†</sup>Corresponding Author &nbsp;&nbsp;
+            </p>
+
+            <div class="row justify-content-center">
+              <!--
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://arxiv.org/abs/2407.01029" role="button"  target="_blank">
+                    <i class="fa fa-file"></i> Paper</a> </p>
+              </div>
+              -->
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://github.com/bawangxiaoxia111/G-Gaussian-Splatting" role="button"  target="_blank">
+                    <i class="fa fa-github-alt"></i> Code </a> </p>
+              </div>
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://drive.google.com/file/d/1_hPQLEmtZ6AS2jnOIAFC8iPZ4Nqc8JKu/view?usp=sharing" role="button"  target="_blank">
+                    <i class="fa fa-database"></i> Dataset </a> </p>
+              </div>
+              <!--
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="#bib" role="button"  target="_blank">
+                    <i class="fa fa-database"></i> BibTex </a> </p>
+              </div>
+              -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+   <section>
+  <div class="container">
+    <div class="row text-center">
+
+      <div class="col-md-3">
+        <video width="100%" autoplay muted loop playsinline>
+          <source src="./pic/vid156_Our.mp4" type="video/mp4">
+        </video>
+        <p style="margin-top:8px;">Our</p>
+      </div>
+
+      <div class="col-md-3">
+        <video width="100%" autoplay muted loop playsinline>
+          <source src="./pic/vid156_4D-GS.mp4" type="video/mp4">
+        </video>
+        <p style="margin-top:8px;">4D-GS</p>
+      </div>
+
+      <div class="col-md-3">
+        <video width="100%" autoplay muted loop playsinline>
+          <source src="./pic/vid156_Endo-4DGS.mp4" type="video/mp4">
+        </video>
+        <p style="margin-top:8px;">Endo-4DGS</p>
+      </div>
+
+      <div class="col-md-3">
+        <video width="100%" autoplay muted loop playsinline>
+          <source src="./pic/vid156_EndoGaussian.mp4" type="video/mp4">
+        </video>
+        <p style="margin-top:8px;">EndoGaussian</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+  <!-- abstract -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h3>Abstract</h3>
+            <hr style="margin-top:0px">
+            <!-- <h6 style="color:#8899a5">  -->
+              <!-- SyncDreamer is able to directly generate multiview consistent images, which allows 3D reconstruction by NeuS or NeRF without SDS loss.  -->
+              <!-- TL;DR:<i>Endora</i> enables the <b>high-fidelity medical video generation</b> on endoscopy scenes and demonstrates the <b>versatile ability through successful applications</b> in video-based disease diagnosis and 3D surgical scene reconstruction. -->
+            <!-- </h6> -->
+
+              <!-- <video width="80%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                  <source src="video/teaser.mp4" type="video/mp4">
+              </video> -->
+
+
+
+         <p class="text-left">
+         This paper presents a novel Dual-Stage Decoupled Gaussian Splatting framework, Mono-DDGS, for dynamic monocular endoscopic scene reconstruction that does not rely on additional auxiliary information (e.g., depth and masks). 
+           A dual-stage decoupled Gaussian deformation strategy decouples the time-invariant spatial structure reconstruction from temporal deformation modelling, alleviating severe geometry-motion entanglement and geometry-drift over time under limited viewpoints and dynamic motion in Stage I, thereby enabling the modelling of complex non-rigid soft-tissue deformation while preserving the canonical geometry in Stage II. 
+           A hierarchical triprojection decomposition models spatial-temporal interactions using nine factorised planes, enabling expressive yet controlled non-rigid deformation modelling while preserving the canonical geometry and temporal coherence during decoding. 
+           Finally, we propose a semi-automatic specular reflection detection pipeline to construct a dedicated new dataset, which is then used to optimize the specular reflection removal network for suppressing highlights in rendered views. 
+           Extensive experiments on both monocular and stereo endoscopic datasets demonstrate that our method consistently outperforms state-of-the-art approaches.
+        </p>
+
+
+        <p class="text-center">
+          <!-- Reverse process of SyncDreamer's multiview diffusion. -->
+          <!-- Sampled realistic endoscopy videos by <i>Endora</i>.  -->
+        </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h3>Highlight</h3>
+            <hr style="margin-top:0px">
+            <!-- <h6 style="color:#8899a5">  -->
+              <!-- SyncDreamer is able to directly generate multiview consistent images, which allows 3D reconstruction by NeuS or NeRF without SDS loss.  -->
+              <!-- TL;DR:<i>Endora</i> enables the <b>high-fidelity medical video generation</b> on endoscopy scenes and demonstrates the <b>versatile ability through successful applications</b> in video-based disease diagnosis and 3D surgical scene reconstruction. -->
+            <!-- </h6> -->
+
+              <!-- <video width="80%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                  <source src="video/teaser.mp4" type="video/mp4">
+              </video> -->
+
+          <p class="text-left">
+            <ul style="list-style-position: inside; text-align: left; margin-left: 0x;">
+              <li>Our dual-stage decoupled Gaussian deformation strategy effectively alleviates severe geometry-motion entanglement in monocular endoscopic scenes, thereby stabilising geometry under limited viewpoints and dynamic motion and modelling complex non-rigid soft-tissue deformation while preserving the canonical geometry.</li> 
+              <li>A hierarchical triprojection decomposition is designed to represent 4D spatio-temporal features efficiently with compact planes.</li>
+              <li>We propose a semi-automatic specular reflection detection pipeline to construct a new specular detection dataset, which is then used to optimize the existing endoscopic specular reflection removal network, improving the quality of the render views without affecting geometric reconstruction.</li>
+
+
+            </ul>
+         
+          
+          </p>
+
+        <p class="text-center">
+          <!-- Reverse process of SyncDreamer's multiview diffusion. -->
+          <!-- Sampled realistic endoscopy videos by <i>Endora</i>.  -->
+        </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+  
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h2>Network</h2>
+            <hr style="margin-top:0px">
+            <!-- <img src="./pic/Fig1.png" alt="" width="1000" height="400"> -->
+            <img src="./pic/Fig1.png" alt="" width="1000" height="640">
+            <br>
+            <br>
+            <div class="text-center">
+              The overall flow of Mono-DDGS.
+            <div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h2>Experimental Results </h2>
+            <hr style="margin-top:0px">
+            <h3 class="new_h3"> Quantitative Results </h3>
+            <img src="./pic/Fig2.png" alt="" width="1000" height="600">
+            <h3 class="new_h3"> Qualitative Results </h3>
+            <img src="./pic/Fig3.png" alt="" width="700" height="340">
+            
+      </div>
+    </div>
+  </section>
+  <br>
+  
+
+  <!-- citing -->
+  <!--
+  <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Citation</h3>
+          <hr style="margin-top:0px">
+              <pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
+<code id="bib">@article{li2024endosparse,
+  author    = {Chenxin Li and Brandon Y. Feng and Yifan Liu and Hengyu Liu and Cheng Wang and Weihao Yu and Yixuan Yuan},
+  title     = {EndoSparse: Real-Time Sparse View Synthesis of Endoscopic Scenes using Gaussian Splatting},
+  journal   = {arXiv preprint},
+  year      = {2024}
+}</code>
+              </pre>
+          <hr>
+      </div>
+    </div>
+  </div>
+  -->
+          
+  <!--
+  <div class="container">
+    <div class="row ">
+      <div class="col-12">
+          <h3>Relevant Works</h3>
+
+          <hr style="margin-top:0px">
+          <div class="paper">
+              <h2><a>EndoGaussian: Real-time Gaussian Splatting for Dynamic Endoscopic Scene Reconstruction</a></h2>
+              <p>An intial exploration into real-time surgincal scene reconstruction built on 3D Gaussian Splatting. </p>
+              <p>
+                <a href="https://yifliu3.github.io/EndoGaussian/">[Page]</a> | <a href="https://arxiv.org/pdf/2401.12561.pdf">[Paper]</a> | <a href="https://github.com/yifliu3/EndoGaussian">[Code]</a>
+              </p>
+          </div>
+
+          <hr style="margin-top:0px">
+          <div class="paper">
+              <h2><a>LGS: A Light-weight 4D Gaussian Splatting for Efficient Surgical Scene Reconstruction</a></h2>
+              <p> An initial investigation into memory-efficient surgical scene reconstruction achieves over 9X compression while preserving high visual quality and efficiency.</p>
+              <p>
+                <a href="https://lgs-endo.github.io/">[Page]</a> | <a href="https://arxiv.org/abs/2406.16073">[Paper]</a> | <a href="https://github.com/CUHK-AIM-Group/LGS">[Code]</a>
+              </p>
+          </div>
+
+          <hr style="margin-top:0px">
+          <div class="paper">
+              <h2><a>Endora: Video Generation Models as Endoscopy Simulators</a></h2>
+              <p>A pioneering exploration into high-fidelity medical video generation on endoscopy scenes.</p>
+              <p>
+                <a href="https://endora-medvidgen.github.io/">[Page]</a> | <a href="https://arxiv.org/abs/2403.11050">[Paper]</a> | <a href="https://github.com/XGGNet/Endora">[Code]</a>
+              </p>
+          </div>
+
+          <hr style="margin-top:0px">
+          <div class="paper">
+              <h2><a>U-KAN Makes Strong Backbone for Medical Image Segmentation and Generation</a></h2>
+              <p>An innovative enhancement of U-Net for medical image tasks using Kolmogorov-Arnold Network (KAN).</p>
+              <p>
+                <a href="https://yes-ukan.github.io/">[Page]</a> | <a href="https://arxiv.org/pdf/2406.02918">[Paper]</a> | <a href="https://github.com/CUHK-AIM-Group/U-KAN">[Code]</a>
+              </p>
+          </div>
+
+          <!-- <div class="paper">
+              <h2><a>Generator Versus Segmentor: Pseudo-healthy Synthesis</a></h2>
+              <p>
+                A pioneering attempt to recreate and edit medical visual content according to different physiological attributes
+  
+               </p>
+              <p>
+                <a href="https://link.springer.com/content/pdf/10.1007/978-3-030-87231-1_15.pdf">[Paper]</a> | <a href="https://github.com/Au3C2/GVS">[Code]</a>
+              </p>
+          </div> -->
+          
+          <hr>
+
+      </div>
+    </div>
+  </div>
+
+
+  <footer class="text-center" style="margin-bottom:10px">
+      Modified from <a href="https://endo-sparse.github.io/" target="_blank">this website</a>
+  </footer>
+
+</body>
+</html>
