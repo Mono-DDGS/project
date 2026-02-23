@@ -1,8 +1,5 @@
 ## Official Website of Mono-DDGS: Endoscopic Monocular Scene Reconstruction with Dual-Stage Decoupled Gaussian Splatting
 <!--
-Accepted by International Conference on Medical Image Computing and Computer Assisted Intervention (MICCAI 2024)
--->
-<!--
 **yes-ukan/yes-ukan** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
 Here are some ideas to get you started:
@@ -16,3 +13,4 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
+
